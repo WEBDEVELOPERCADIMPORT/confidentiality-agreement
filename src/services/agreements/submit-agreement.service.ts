@@ -1,7 +1,12 @@
-export interface AgreementAttachment {
-  filename: string;
-  content: string;
-}
+export type AgreementAttachment =
+  | {
+      filename: string;
+      content: string;
+    }
+  | {
+      filename: string;
+      path: string;
+    };
 
 export interface SubmitAgreementPayload {
   company: string;

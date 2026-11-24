@@ -1,24 +1,17 @@
 import { defineAction, ActionError } from 'astro:actions';
 import { z } from 'astro:schema';
-import agreementsData from '../../data/agreements/agreements.data.json';
+import { getAgreementBySlugService } from '../../services/agreements/get-agreements.service';
 import {
   submitAgreementService,
   type AgreementAttachment,
 } from '../../services/agreements/submit-agreement.service';
-import { prepareAgreementAttachmentService } from '../../services/agreements/prepare-attachment.service';
 
 export interface SubmitAgreementResult {
   message: string;
   data: {
     email: string;
     submitted: boolean;
-    trackingId?: string;
   };
-}
-
-interface AgreementEntryMeta {
-  slug: string;
-  attachmentPdf?: string;
 }
 
 export const submitAgreement = defineAction({
@@ -35,8 +28,7 @@ export const submitAgreement = defineAction({
   }),
   handler: async (input): Promise<SubmitAgreementResult> => {
     try {
-      const entries = (agreementsData.agreements ?? []) as AgreementEntryMeta[];
-      const found = entries.find((item) => item.slug === input.slug);
+      const found = await getAgreementBySlugService(input.slug);
 
       if (!found) {
         throw new ActionError({
@@ -52,25 +44,10 @@ export const submitAgreement = defineAction({
         },
       ];
 
-      let trackingId: string | undefined;
-
-      if (found.attachmentPdf) {
-        const prepared = await prepareAgreementAttachmentService({
-          fileName: found.attachmentPdf,
-          slug: input.slug,
-          recipient: {
-            company: input.company,
-            country: input.country,
-            name: input.name,
-            title: input.title,
-            email_address: input.email_address,
-            date: input.date,
-          },
-        });
-        trackingId = prepared.trackingId;
+      if (found.attachmentPdf?.path) {
         attachments.push({
-          filename: prepared.filename,
-          content: prepared.content,
+          filename: found.attachmentPdf.filename,
+          path: found.attachmentPdf.path,
         });
       }
 
@@ -89,7 +66,6 @@ export const submitAgreement = defineAction({
         data: {
           email: input.email_address,
           submitted: true,
-          trackingId,
         },
       };
     } catch (error) {

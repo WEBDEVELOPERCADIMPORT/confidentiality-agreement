@@ -292,14 +292,28 @@ export async function generateAgreementPdf({
   // CAD Import Signature area
   if (agreement.cadImport.signatureDataUrl) {
     try {
-      doc.addImage(
-        agreement.cadImport.signatureDataUrl,
-        'PNG',
-        leftX,
-        leftY,
-        48,
-        18
-      );
+      const rawCadSig = agreement.cadImport.signatureDataUrl.startsWith('data:')
+        ? agreement.cadImport.signatureDataUrl
+        : await loadImageAsDataUrl(agreement.cadImport.signatureDataUrl);
+
+      if (rawCadSig) {
+        const optimizedCadSig = await optimizeImageForPdf(
+          rawCadSig,
+          420,
+          160,
+          'JPEG'
+        );
+        doc.addImage(
+          optimizedCadSig,
+          'JPEG',
+          leftX,
+          leftY,
+          48,
+          18,
+          undefined,
+          'FAST'
+        );
+      }
     } catch {
       // Fallback to line only
     }
