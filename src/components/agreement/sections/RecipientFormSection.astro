@@ -1,0 +1,396 @@
+---
+import type { Lang } from '../../../i18n/config.i18n';
+import type { AgreementData } from '../../../actions/agreements/get-agreement-by-slug.action';
+import agreementContent from '../../../data/site-agreement-content.json';
+import SignatureModal from '../components/SignatureModal.astro';
+import SuccessModal from '../components/SuccessModal.astro';
+
+interface Props {
+  agreement: AgreementData;
+  lang: Lang;
+}
+
+const { agreement, lang } = Astro.props;
+const t = agreementContent[lang] ?? agreementContent.es;
+const f = t.form.fields;
+
+const clientConfig = JSON.stringify({
+  agreement,
+  pdfLabels: t.pdf,
+  validation: t.validation,
+  status: t.status,
+  buttons: {
+    submit: t.form.submitButton,
+    generating: t.form.generatingButton,
+    sign: f.signature.signButton,
+    change: f.signature.changeButton,
+  },
+});
+---
+
+<section
+  aria-labelledby="recipient-form-heading"
+  class="bg-white border border-slate-200 rounded-xl shadow-xs p-6 sm:p-10"
+>
+  <div class="border-b border-slate-200 pb-5 mb-6">
+    <h2 id="recipient-form-heading" class="text-xl font-semibold text-slate-900">
+      {t.form.sectionTitle}
+    </h2>
+    <p class="mt-1.5 text-sm text-slate-600">
+      {t.form.sectionSubtitle}
+    </p>
+  </div>
+
+  <form id="recipient-nda-form" novalidate class="space-y-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <!-- Company Name -->
+      <div>
+        <label for="nda-company" class="block text-sm font-medium text-slate-800 mb-1.5">
+          {f.companyName.label} <span class="text-red-600">*</span>
+        </label>
+        <input
+          id="nda-company"
+          name="companyName"
+          type="text"
+          required
+          placeholder={f.companyName.placeholder}
+          class="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900"
+        />
+        <p data-error-for="companyName" class="hidden mt-1 text-xs text-red-600"></p>
+      </div>
+
+      <!-- Country -->
+      <div>
+        <label for="nda-country" class="block text-sm font-medium text-slate-800 mb-1.5">
+          {f.country.label} <span class="text-red-600">*</span>
+        </label>
+        <input
+          id="nda-country"
+          name="country"
+          type="text"
+          required
+          placeholder={f.country.placeholder}
+          class="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900"
+        />
+        <p data-error-for="country" class="hidden mt-1 text-xs text-red-600"></p>
+      </div>
+
+      <!-- Authorized Representative -->
+      <div>
+        <label for="nda-representative" class="block text-sm font-medium text-slate-800 mb-1.5">
+          {f.representativeName.label} <span class="text-red-600">*</span>
+        </label>
+        <input
+          id="nda-representative"
+          name="representativeName"
+          type="text"
+          required
+          placeholder={f.representativeName.placeholder}
+          class="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900"
+        />
+        <p data-error-for="representativeName" class="hidden mt-1 text-xs text-red-600"></p>
+      </div>
+
+      <!-- Title -->
+      <div>
+        <label for="nda-title" class="block text-sm font-medium text-slate-800 mb-1.5">
+          {f.title.label} <span class="text-red-600">*</span>
+        </label>
+        <input
+          id="nda-title"
+          name="title"
+          type="text"
+          required
+          placeholder={f.title.placeholder}
+          class="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900"
+        />
+        <p data-error-for="title" class="hidden mt-1 text-xs text-red-600"></p>
+      </div>
+
+      <!-- Email -->
+      <div>
+        <label for="nda-email" class="block text-sm font-medium text-slate-800 mb-1.5">
+          {f.email.label} <span class="text-red-600">*</span>
+        </label>
+        <input
+          id="nda-email"
+          name="email"
+          type="email"
+          required
+          placeholder={f.email.placeholder}
+          class="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900"
+        />
+        <p data-error-for="email" class="hidden mt-1 text-xs text-red-600"></p>
+      </div>
+
+      <!-- Date -->
+      <div>
+        <label for="nda-date" class="block text-sm font-medium text-slate-800 mb-1.5">
+          {f.date.label} <span class="text-red-600">*</span>
+        </label>
+        <input
+          id="nda-date"
+          name="date"
+          type="date"
+          required
+          class="w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 focus:border-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900"
+        />
+        <p data-error-for="date" class="hidden mt-1 text-xs text-red-600"></p>
+      </div>
+    </div>
+
+    <!-- Signature Capture -->
+    <div class="pt-2">
+      <span class="block text-sm font-medium text-slate-800 mb-2">
+        {f.signature.label} <span class="text-red-600">*</span>
+      </span>
+
+      <input id="nda-signature-data" name="signatureDataUrl" type="hidden" value="" />
+
+      <div class="flex flex-col sm:flex-row sm:items-center gap-4 p-4 rounded-lg border border-slate-200 bg-slate-50">
+        <div class="flex-1 min-h-24 flex items-center justify-center rounded-md border border-dashed border-slate-300 bg-white px-4 py-2">
+          <p id="nda-signature-placeholder" class="text-xs text-slate-400 text-center">
+            {f.signature.placeholder}
+          </p>
+          <img
+            id="nda-signature-preview"
+            src=""
+            alt={f.signature.previewAlt}
+            class="hidden max-h-20 object-contain"
+          />
+        </div>
+
+        <button
+          id="nda-open-signature-btn"
+          type="button"
+          class="shrink-0 inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-slate-800 bg-white border border-slate-300 rounded-lg shadow-2xs hover:bg-slate-100 transition-colors cursor-pointer"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+          </svg>
+          <span id="nda-open-signature-label">{f.signature.signButton}</span>
+        </button>
+      </div>
+      <p data-error-for="signatureDataUrl" class="hidden mt-1 text-xs text-red-600"></p>
+    </div>
+
+    <!-- Status Banner -->
+    <div id="nda-form-status" class="hidden rounded-lg px-4 py-3 text-sm font-medium"></div>
+
+    <!-- Submit -->
+    <div class="pt-2 flex justify-end">
+      <button
+        id="nda-submit-btn"
+        type="submit"
+        class="w-full sm:w-auto px-6 py-3 text-sm font-semibold text-white bg-slate-900 rounded-lg shadow-xs hover:bg-slate-800 disabled:opacity-60 disabled:cursor-not-allowed transition-colors cursor-pointer"
+      >
+        {t.form.submitButton}
+      </button>
+    </div>
+  </form>
+
+  <script id="nda-form-config" type="application/json" set:html={clientConfig}></script>
+  <SignatureModal lang={lang} modalId="signature-modal" />
+  <SuccessModal lang={lang} modalId="agreement-success-modal" />
+</section>
+
+<script>
+  import { actions } from 'astro:actions';
+  import { generateAgreementPdf } from '../../../utils/pdf/generateAgreementPdf';
+
+  function setupRecipientForm() {
+    const form = document.getElementById('recipient-nda-form') as HTMLFormElement | null;
+    const configEl = document.getElementById('nda-form-config');
+    if (!form || !configEl || form.dataset.initialized === 'true') return;
+    form.dataset.initialized = 'true';
+
+    const config = JSON.parse(configEl.textContent || '{}');
+    const dateInput = form.querySelector<HTMLInputElement>('#nda-date');
+    const openSigBtn = document.getElementById('nda-open-signature-btn');
+    const openSigLabel = document.getElementById('nda-open-signature-label');
+    const sigInput = document.getElementById('nda-signature-data') as HTMLInputElement | null;
+    const sigPreview = document.getElementById('nda-signature-preview') as HTMLImageElement | null;
+    const sigPlaceholder = document.getElementById('nda-signature-placeholder');
+    const statusEl = document.getElementById('nda-form-status');
+    const submitBtn = document.getElementById('nda-submit-btn') as HTMLButtonElement | null;
+
+    // Default today's date
+    if (dateInput && !dateInput.value) {
+      const now = new Date();
+      const yyyy = now.getFullYear();
+      const mm = String(now.getMonth() + 1).padStart(2, '0');
+      const dd = String(now.getDate()).padStart(2, '0');
+      dateInput.value = `${yyyy}-${mm}-${dd}`;
+    }
+
+    const setFieldError = (field: string, message: string | null) => {
+      const errEl = form.querySelector<HTMLElement>(`[data-error-for="${field}"]`);
+      if (!errEl) return;
+      if (message) {
+        errEl.textContent = message;
+        errEl.classList.remove('hidden');
+      } else {
+        errEl.textContent = '';
+        errEl.classList.add('hidden');
+      }
+    };
+
+    const showStatus = (type: 'success' | 'error', message: string) => {
+      if (!statusEl) return;
+      statusEl.textContent = message;
+      statusEl.className =
+        type === 'success'
+          ? 'rounded-lg px-4 py-3 text-sm font-medium bg-emerald-50 text-emerald-800 border border-emerald-200'
+          : 'rounded-lg px-4 py-3 text-sm font-medium bg-red-50 text-red-800 border border-red-200';
+    };
+
+    openSigBtn?.addEventListener('click', () => {
+      const modal = document.getElementById('signature-modal');
+      modal?.dispatchEvent(new CustomEvent('signature:open'));
+    });
+
+    document.addEventListener('signature:saved', (e: Event) => {
+      const customEvent = e as CustomEvent<{ dataUrl: string; modalId: string }>;
+      if (customEvent.detail?.modalId !== 'signature-modal') return;
+      const { dataUrl } = customEvent.detail;
+      if (sigInput) sigInput.value = dataUrl;
+      if (sigPreview) {
+        sigPreview.src = dataUrl;
+        sigPreview.classList.remove('hidden');
+      }
+      sigPlaceholder?.classList.add('hidden');
+      if (openSigLabel) {
+        openSigLabel.textContent = config.buttons.change;
+      }
+      setFieldError('signatureDataUrl', null);
+    });
+
+    form.addEventListener('submit', async (e: SubmitEvent) => {
+      e.preventDefault();
+      if (statusEl) statusEl.classList.add('hidden');
+
+      const formData = new FormData(form);
+      const companyName = String(formData.get('companyName') || '').trim();
+      const country = String(formData.get('country') || '').trim();
+      const representativeName = String(formData.get('representativeName') || '').trim();
+      const title = String(formData.get('title') || '').trim();
+      const email = String(formData.get('email') || '').trim();
+      const date = String(formData.get('date') || '').trim();
+      const signatureDataUrl = String(formData.get('signatureDataUrl') || '').trim();
+
+      let valid = true;
+      const requiredFields: Array<[string, string]> = [
+        ['companyName', companyName],
+        ['country', country],
+        ['representativeName', representativeName],
+        ['title', title],
+        ['date', date],
+      ];
+
+      for (const [name, val] of requiredFields) {
+        if (!val) {
+          setFieldError(name, config.validation.requiredField);
+          valid = false;
+        } else {
+          setFieldError(name, null);
+        }
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email) {
+        setFieldError('email', config.validation.requiredField);
+        valid = false;
+      } else if (!emailRegex.test(email)) {
+        setFieldError('email', config.validation.invalidEmail);
+        valid = false;
+      } else {
+        setFieldError('email', null);
+      }
+
+      if (!signatureDataUrl) {
+        setFieldError('signatureDataUrl', config.validation.signatureRequired);
+        valid = false;
+      } else {
+        setFieldError('signatureDataUrl', null);
+      }
+
+      if (!valid) return;
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = config.buttons.generating;
+      }
+
+      try {
+        const { fileName, base64 } = await generateAgreementPdf({
+          agreement: config.agreement,
+          recipient: {
+            companyName,
+            country,
+            representativeName,
+            title,
+            email,
+            date,
+            signatureDataUrl,
+          },
+          labels: config.pdfLabels,
+        });
+
+        const { data: submitResponse, error: submitError } =
+          await actions.agreements.submitAgreement({
+            slug: config.agreement.slug,
+            company: companyName,
+            country,
+            name: representativeName,
+            title,
+            email_address: email,
+            date,
+            filename: fileName,
+            pdfBase64: base64,
+          });
+
+        if (submitError || !submitResponse?.data?.submitted) {
+          throw new Error(submitError?.message || config.status.errorGenerating);
+        }
+
+        document.dispatchEvent(
+          new CustomEvent('agreement:submitted', {
+            detail: { email },
+          })
+        );
+
+        form.reset();
+        if (dateInput) {
+          const now = new Date();
+          const yyyy = now.getFullYear();
+          const mm = String(now.getMonth() + 1).padStart(2, '0');
+          const dd = String(now.getDate()).padStart(2, '0');
+          dateInput.value = `${yyyy}-${mm}-${dd}`;
+        }
+        if (sigInput) sigInput.value = '';
+        if (sigPreview) {
+          sigPreview.src = '';
+          sigPreview.classList.add('hidden');
+        }
+        sigPlaceholder?.classList.remove('hidden');
+        if (openSigLabel) {
+          openSigLabel.textContent = config.buttons.sign;
+        }
+      } catch (err) {
+        const msg =
+          err instanceof Error && err.message
+            ? err.message
+            : config.status.errorGenerating;
+        showStatus('error', msg);
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = config.buttons.submit;
+        }
+      }
+    });
+  }
+
+  setupRecipientForm();
+  document.addEventListener('astro:page-load', setupRecipientForm);
+</script>

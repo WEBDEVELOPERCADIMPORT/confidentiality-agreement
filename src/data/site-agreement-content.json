@@ -1,0 +1,178 @@
+{
+  "es": {
+    "meta": {
+      "titleSuffix": "CAD Import Inc. | Acuerdo de Confidencialidad"
+    },
+    "header": {
+      "documentBadge": "Documento Legal Confidencial",
+      "logoAlt": "Logotipo de CAD Import Inc.",
+      "switchLangLabel": "English"
+    },
+    "document": {
+      "partiesHeading": "Partes del Acuerdo",
+      "clausesHeading": "Cláusulas"
+    },
+    "form": {
+      "sectionTitle": "Datos y Firma del Receptor",
+      "sectionSubtitle": "Complete los datos de la empresa receptora y capture su firma electrónica para generar el documento PDF firmado.",
+      "fields": {
+        "companyName": {
+          "label": "Nombre de la empresa",
+          "placeholder": "Ej. Ingeniería del Sureste S.A. de C.V."
+        },
+        "country": {
+          "label": "País",
+          "placeholder": "Ej. México"
+        },
+        "representativeName": {
+          "label": "Representante autorizado (nombre)",
+          "placeholder": "Nombre completo del representante"
+        },
+        "title": {
+          "label": "Cargo / Puesto",
+          "placeholder": "Ej. Director de Operaciones"
+        },
+        "email": {
+          "label": "Correo electrónico",
+          "placeholder": "nombre@empresa.com"
+        },
+        "date": {
+          "label": "Fecha de firma"
+        },
+        "signature": {
+          "label": "Firma electrónica",
+          "signButton": "Firmar documento",
+          "changeButton": "Cambiar firma",
+          "placeholder": "Aún no se ha capturado una firma.",
+          "previewAlt": "Vista previa de la firma del representante autorizado"
+        }
+      },
+      "submitButton": "Firmar y enviar acuerdo",
+      "generatingButton": "Enviando acuerdo..."
+    },
+    "modal": {
+      "title": "Firma Electrónica",
+      "instruction": "Dibuje su firma dentro del recuadro utilizando su mouse o pantalla táctil.",
+      "clearButton": "Limpiar",
+      "cancelButton": "Cancelar",
+      "saveButton": "Guardar firma",
+      "emptyError": "Por favor dibuje su firma antes de guardar."
+    },
+    "successModal": {
+      "title": "Gracias por firmar el acuerdo de confidencialidad",
+      "message": "El documento se estará enviando por correo electrónico a:",
+      "closeButton": "Aceptar"
+    },
+    "validation": {
+      "requiredField": "Este campo es obligatorio.",
+      "invalidEmail": "Ingrese un correo electrónico válido.",
+      "signatureRequired": "Debe capturar su firma electrónica antes de enviar el acuerdo."
+    },
+    "status": {
+      "successDownloaded": "Acuerdo firmado y enviado correctamente.",
+      "errorGenerating": "Ocurrió un error al enviar el acuerdo. Intente nuevamente."
+    },
+    "pdf": {
+      "disclosingPartyTitle": "PARTE DIVULGADORA (CAD IMPORT INC.)",
+      "receivingPartyTitle": "PARTE RECEPTORA (RECEPTOR)",
+      "companyLabel": "Empresa",
+      "countryLabel": "País",
+      "representativeLabel": "Representante autorizado",
+      "titleLabel": "Cargo",
+      "emailLabel": "Correo electrónico",
+      "dateLabel": "Fecha",
+      "signatureLabel": "Firma",
+      "authorizedSignatureLine": "Firma autorizada",
+      "pageLabel": "Página",
+      "ofLabel": "de"
+    }
+  },
+  "en": {
+    "meta": {
+      "titleSuffix": "CAD Import Inc. | Confidentiality Agreement"
+    },
+    "header": {
+      "documentBadge": "Confidential Legal Document",
+      "logoAlt": "CAD Import Inc. Logo",
+      "switchLangLabel": "Español"
+    },
+    "document": {
+      "partiesHeading": "Parties to the Agreement",
+      "clausesHeading": "Clauses"
+    },
+    "form": {
+      "sectionTitle": "Recipient Information & Signature",
+      "sectionSubtitle": "Complete the receiving company details and capture your electronic signature to generate the executed PDF document.",
+      "fields": {
+        "companyName": {
+          "label": "Company name",
+          "placeholder": "e.g. Acme Engineering Corp."
+        },
+        "country": {
+          "label": "Country",
+          "placeholder": "e.g. United States"
+        },
+        "representativeName": {
+          "label": "Authorized representative (name)",
+          "placeholder": "Full name of authorized representative"
+        },
+        "title": {
+          "label": "Title",
+          "placeholder": "e.g. Operations Director"
+        },
+        "email": {
+          "label": "Email",
+          "placeholder": "name@company.com"
+        },
+        "date": {
+          "label": "Date"
+        },
+        "signature": {
+          "label": "Signature",
+          "signButton": "Sign document",
+          "changeButton": "Change signature",
+          "placeholder": "No signature captured yet.",
+          "previewAlt": "Preview of the authorized representative signature"
+        }
+      },
+      "submitButton": "Sign & Submit Agreement",
+      "generatingButton": "Submitting agreement..."
+    },
+    "modal": {
+      "title": "Electronic Signature",
+      "instruction": "Draw your signature inside the box below using your mouse or touch screen.",
+      "clearButton": "Clear",
+      "cancelButton": "Cancel",
+      "saveButton": "Save Signature",
+      "emptyError": "Please draw your signature before saving."
+    },
+    "successModal": {
+      "title": "Thank you for signing the Confidentiality Agreement",
+      "message": "The document will be sent by email to:",
+      "closeButton": "Done"
+    },
+    "validation": {
+      "requiredField": "This field is required.",
+      "invalidEmail": "Please enter a valid email address.",
+      "signatureRequired": "Please capture your electronic signature before submitting the agreement."
+    },
+    "status": {
+      "successDownloaded": "Agreement executed and submitted successfully.",
+      "errorGenerating": "An error occurred while submitting the agreement. Please try again."
+    },
+    "pdf": {
+      "disclosingPartyTitle": "DISCLOSING PARTY (CAD IMPORT INC.)",
+      "receivingPartyTitle": "RECEIVING PARTY (RECIPIENT)",
+      "companyLabel": "Company",
+      "countryLabel": "Country",
+      "representativeLabel": "Authorized representative",
+      "titleLabel": "Title",
+      "emailLabel": "Email",
+      "dateLabel": "Date",
+      "signatureLabel": "Signature",
+      "authorizedSignatureLine": "Authorized signature",
+      "pageLabel": "Page",
+      "ofLabel": "of"
+    }
+  }
+}

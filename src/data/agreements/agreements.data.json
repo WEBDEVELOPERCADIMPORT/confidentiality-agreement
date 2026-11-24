@@ -1,0 +1,75 @@
+{
+  "agreements": [
+    {
+      "slug": "cancun-technical-file",
+      "fileNamePrefix": "NDA-Cancun-Technical-File",
+      "attachmentPdf": "01.-CANCUN PRESENTACION.pdf",
+      "cadImport": {
+        "company": "CAD Import Inc.",
+        "jurisdiction": "New Castle, Delaware, United States",
+        "representativeName": "Rolf Obermaier",
+        "title": "Supply Chain & Procurement Manager",
+        "signatureDataUrl": ""
+      },
+      "en": {
+        "title": "CONFIDENTIALITY AGREEMENT",
+        "subtitle": "Confidentiality agreement for the Cancún technical file",
+        "effectiveDateLabel": "Effective Date",
+        "parties": {
+          "disclosingLabel": "Disclosing Party",
+          "disclosingDetails": "CAD Import Inc., a corporation organized under the laws of the State of Delaware, located in New Castle, Delaware, United States.",
+          "receivingLabel": "Receiving Party (Recipient)",
+          "receivingDetails": "The entity or authorized representative executing this Agreement below."
+        },
+        "intro": "This Confidentiality Agreement (the \"Agreement\") is entered into as of the date of electronic signature below by and between CAD Import Inc., with principal offices in New Castle, Delaware, United States (\"Disclosing Party\"), and the Receiving Party identified in the signature block below (\"Recipient\"). Both parties agree to the following terms and conditions governing the disclosure of confidential technical and commercial information related to the Cancún technical file.",
+        "clauses": [
+          {
+            "number": "1",
+            "title": "Purpose",
+            "body": "The Disclosing Party intends to share certain confidential technical, engineering, regulatory, and commercial documentation related to the Cancún technical file (the \"Project\") with the Recipient solely for the purpose of evaluating, reviewing, or performing authorized technical or procurement activities in connection with the Project (the \"Permitted Purpose\")."
+          },
+          {
+            "number": "2",
+            "title": "Confidential Information",
+            "body": "\"Confidential Information\" means all non-public information, whether in written, electronic, graphic, or oral form, disclosed by or on behalf of the Disclosing Party to the Recipient, including without limitation technical files, specifications, drawings, CAD models, bills of materials, test reports, regulatory dossiers, pricing, supplier data, and business processes. Confidential Information does not include information that: (a) is or becomes publicly available without breach of this Agreement; (b) was lawfully known to the Recipient prior to disclosure; or (c) is independently developed by the Recipient without reference to the Confidential Information."
+          },
+          {
+            "number": "3",
+            "title": "Obligations",
+            "body": "The Recipient shall: (a) hold all Confidential Information in strict confidence using at least the same degree of care it uses to protect its own confidential information, and no less than reasonable care; (b) not disclose any Confidential Information to any third party without the prior written consent of the Disclosing Party, except to its employees or professional advisors who have a strict need to know for the Permitted Purpose and are bound by written confidentiality obligations at least as protective as this Agreement; and (c) use the Confidential Information exclusively for the Permitted Purpose."
+          },
+          {
+            "number": "4",
+            "title": "No rights granted",
+            "body": "All Confidential Information remains the sole and exclusive property of the Disclosing Party. Nothing in this Agreement shall be construed as granting to the Recipient any license, ownership, intellectual property right, or other right in or to the Confidential Information, whether express or implied, other than the limited right to review and use it strictly for the Permitted Purpose."
+          },
+          {
+            "number": "5",
+            "title": "Return or destruction",
+            "body": "Upon written request by the Disclosing Party or upon completion or termination of the discussions regarding the Permitted Purpose, the Recipient shall promptly return or securely destroy all tangible and electronic copies, extracts, and derivatives of the Confidential Information, and shall certify such destruction in writing upon request."
+          },
+          {
+            "number": "6",
+            "title": "Term",
+            "body": "This Agreement shall take effect on the date of electronic execution by the Recipient and shall remain in force for a period of five (5) years from the date of disclosure of the Confidential Information, or until such information lawfully enters the public domain without breach of this Agreement, whichever occurs first."
+          },
+          {
+            "number": "7",
+            "title": "Remedies",
+            "body": "The Recipient acknowledges that any unauthorized disclosure or use of Confidential Information may cause irreparable harm to the Disclosing Party for which monetary damages alone would be inadequate. Accordingly, the Disclosing Party shall be entitled to seek immediate injunctive or equitable relief in addition to any other legal remedies available under applicable law."
+          },
+          {
+            "number": "8",
+            "title": "Governing law and jurisdiction",
+            "body": "This Agreement shall be governed by and construed in accordance with the laws of the State of Delaware, United States, without regard to its conflict of laws principles. Any dispute arising out of or in connection with this Agreement shall be subject to the exclusive jurisdiction of the state and federal courts located in New Castle County, Delaware, United States."
+          },
+          {
+            "number": "9",
+            "title": "Electronic signature",
+            "body": "The parties agree that this Agreement may be executed by electronic signature, which shall have the same legal validity, enforceability, and binding effect as an original handwritten signature under applicable electronic signature laws, including the U.S. ESIGN Act and UETA."
+          }
+        ]
+      }
+    }
+  ]
+}

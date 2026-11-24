@@ -1,0 +1,23 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { LANGUAGES, type Lang } from '../../i18n/config.i18n';
+import homeContent from '../../data/site-home-content.json';
+import MinimalBrandHero from '../../components/home/sections/MinimalBrandHero.astro';
+
+const lang = Astro.params.lang as Lang;
+
+if (!(lang in LANGUAGES) || !(lang in homeContent)) {
+  return Astro.redirect('/404');
+}
+
+const t = homeContent[lang];
+---
+
+<Layout
+  title={t.meta.title}
+  lang={lang}
+  description={t.meta.description}
+  minimal={true}
+>
+  <MinimalBrandHero lang={lang} />
+</Layout>

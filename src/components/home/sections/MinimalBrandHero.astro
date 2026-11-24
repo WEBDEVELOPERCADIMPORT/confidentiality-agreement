@@ -1,0 +1,53 @@
+---
+import type { Lang } from "../../../i18n/config.i18n";
+import homeContent from "../../../data/site-home-content.json";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = homeContent[lang] ?? homeContent.es;
+const otherLang: Lang = lang === "es" ? "en" : "es";
+---
+
+<section
+  class="relative flex-1 flex flex-col items-center justify-center px-6 py-16 bg-slate-50 text-slate-900"
+>
+  <div class="absolute top-6 right-6">
+    <a
+      href={`/${otherLang}/`}
+      class="inline-flex items-center px-3 py-1.5 text-xs font-semibold tracking-wide uppercase text-slate-600 bg-white border border-slate-200 rounded-md shadow-xs hover:text-slate-900 hover:border-slate-300 transition-colors"
+    >
+      {otherLang.toUpperCase()}
+    </a>
+  </div>
+
+  <div class="w-full max-w-2xl mx-auto flex flex-col items-center text-center">
+    <div class="mb-10">
+      <img
+        src="/logo.png"
+        alt={t.hero.logoAlt}
+        class="w-44 h-44 sm:w-56 sm:h-56 object-contain mx-auto"
+      />
+    </div>
+
+    <p
+      class="text-xs sm:text-sm font-semibold tracking-[0.22em] uppercase text-slate-500 mb-3"
+    >
+      {t.hero.organization}
+    </p>
+
+    <h1
+      class="text-3xl sm:text-4xl font-semibold tracking-tight text-slate-900"
+    >
+      {t.hero.title}
+    </h1>
+
+    <p
+      class="mt-4 text-sm sm:text-base text-slate-600 max-w-lg leading-relaxed"
+    >
+      {t.hero.subtitle}
+    </p>
+  </div>
+</section>

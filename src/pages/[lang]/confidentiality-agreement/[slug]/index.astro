@@ -1,0 +1,45 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import { LANGUAGES, type Lang } from '../../../../i18n/config.i18n';
+import { actions } from 'astro:actions';
+import agreementContent from '../../../../data/site-agreement-content.json';
+import AgreementDocument from '../../../../components/agreement/sections/AgreementDocument.astro';
+import RecipientFormSection from '../../../../components/agreement/sections/RecipientFormSection.astro';
+
+const lang = Astro.params.lang as Lang;
+const { slug } = Astro.params;
+
+if (!(lang in LANGUAGES) || !slug) {
+  return Astro.redirect('/404');
+}
+
+if (lang !== 'en') {
+  return Astro.redirect(`/en/confidentiality-agreement/${slug}`);
+}
+
+const { data: response, error } = await Astro.callAction(
+  actions.agreements.getAgreementBySlug,
+  { slug }
+);
+
+if (error || !response?.data) {
+  return Astro.redirect('/404');
+}
+
+const agreement = response.data;
+const t = agreementContent.en;
+---
+
+<Layout
+  title={`${agreement.content.title} — ${t.meta.titleSuffix}`}
+  lang="en"
+  description={agreement.content.subtitle}
+  minimal={true}
+>
+  <div class="flex-1 bg-slate-100 py-8 sm:py-12 px-4 sm:px-6">
+    <div class="max-w-4xl mx-auto space-y-8">
+      <AgreementDocument agreement={agreement} lang="en" />
+      <RecipientFormSection agreement={agreement} lang="en" />
+    </div>
+  </div>
+</Layout>

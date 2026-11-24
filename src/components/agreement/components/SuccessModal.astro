@@ -1,0 +1,93 @@
+---
+import type { Lang } from '../../../i18n/config.i18n';
+import agreementContent from '../../../data/site-agreement-content.json';
+
+interface Props {
+  lang: Lang;
+  modalId?: string;
+}
+
+const { lang, modalId = 'agreement-success-modal' } = Astro.props;
+const t = (agreementContent[lang] ?? agreementContent.en).successModal;
+---
+
+<div
+  id={modalId}
+  class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/60 backdrop-blur-xs p-4"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby={`${modalId}-title`}
+  data-success-modal
+>
+  <div class="w-full max-w-md bg-white border border-slate-200 rounded-xl shadow-xl overflow-hidden text-center p-6 sm:p-8 space-y-5">
+    <div class="mx-auto w-12 h-12 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+      </svg>
+    </div>
+
+    <div class="space-y-2">
+      <h3 id={`${modalId}-title`} class="text-lg font-semibold text-slate-900">
+        {t.title}
+      </h3>
+      <p class="text-sm text-slate-600">
+        {t.message}
+      </p>
+      <p
+        data-success-email
+        class="text-sm font-semibold text-slate-900 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 break-all"
+      ></p>
+    </div>
+
+    <div class="pt-2">
+      <button
+        type="button"
+        data-success-close
+        class="w-full px-5 py-2.5 text-sm font-semibold text-white bg-slate-900 rounded-lg hover:bg-slate-800 transition-colors cursor-pointer"
+      >
+        {t.closeButton}
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function setupSuccessModal() {
+    const modals = document.querySelectorAll<HTMLElement>('[data-success-modal]');
+    modals.forEach((modal) => {
+      if (modal.dataset.initialized === 'true') return;
+      modal.dataset.initialized = 'true';
+
+      const emailEl = modal.querySelector<HTMLElement>('[data-success-email]');
+      const closeBtn = modal.querySelector<HTMLButtonElement>('[data-success-close]');
+
+      const closeModal = () => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      };
+
+      const openModal = (email: string) => {
+        if (emailEl) emailEl.textContent = email;
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      };
+
+      document.addEventListener('agreement:submitted', (e: Event) => {
+        const customEvent = e as CustomEvent<{ email: string }>;
+        if (customEvent.detail?.email) {
+          openModal(customEvent.detail.email);
+        }
+      });
+
+      closeBtn?.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e: MouseEvent) => {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+    });
+  }
+
+  setupSuccessModal();
+  document.addEventListener('astro:page-load', setupSuccessModal);
+</script>

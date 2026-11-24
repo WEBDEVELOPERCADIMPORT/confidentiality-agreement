@@ -1,0 +1,26 @@
+{
+  "es": {
+    "meta": {
+      "title": "CAD Import Inc. | Portal de Acuerdos de Confidencialidad",
+      "description": "Plataforma institucional de lectura y firma electrónica de acuerdos de confidencialidad de CAD Import Inc."
+    },
+    "hero": {
+      "logoAlt": "Logotipo de CAD Import Inc.",
+      "organization": "CAD Import Inc.",
+      "title": "Acuerdos de Confidencialidad",
+      "subtitle": "Portal institucional para la revisión y suscripción electrónica de acuerdos de confidencialidad."
+    }
+  },
+  "en": {
+    "meta": {
+      "title": "CAD Import Inc. | Confidentiality Agreements Portal",
+      "description": "Institutional platform for reviewing and electronically executing CAD Import Inc. confidentiality agreements."
+    },
+    "hero": {
+      "logoAlt": "CAD Import Inc. Logo",
+      "organization": "CAD Import Inc.",
+      "title": "Confidentiality Agreements",
+      "subtitle": "Institutional portal for the review and electronic execution of confidentiality agreements."
+    }
+  }
+}

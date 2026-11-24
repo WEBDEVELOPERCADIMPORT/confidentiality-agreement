@@ -1,0 +1,30 @@
+---
+import { getLangFromUrl } from '../../i18n/utils.i18n';
+
+const lang = getLangFromUrl(Astro.url);
+
+const currentPath = Astro.url.pathname;
+const switchLangPath =
+  lang === "es"
+    ? currentPath.replace("/es", "/en")
+    : currentPath.replace("/en", "/es");
+---
+
+<nav class="sticky top-0 z-50 w-full px-6 py-4 bg-white/90 backdrop-blur-md border-b border-slate-200">
+  <div class="max-w-7xl mx-auto flex justify-between items-center">
+    <a href={`/${lang}/`} class="flex items-center gap-3 transition hover:opacity-80">
+      <img src="/images/home/logo.png" class="w-10 h-10 object-contain" alt="CAD Import Inc." />
+      <span class="text-xs font-semibold tracking-widest uppercase text-slate-900">
+        CAD Import Inc.
+      </span>
+    </a>
+
+    <a
+      href={switchLangPath}
+      class="flex items-center justify-center px-3 py-1.5 text-xs font-semibold tracking-wide uppercase text-slate-700 bg-slate-50 border border-slate-200 rounded-md hover:bg-slate-100 hover:text-slate-900 transition-colors"
+      title={lang === "es" ? "Switch to English" : "Cambiar a Español"}
+    >
+      {lang === "es" ? "EN" : "ES"}
+    </a>
+  </div>
+</nav>
